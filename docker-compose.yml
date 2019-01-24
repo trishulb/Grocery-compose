@@ -1,0 +1,23 @@
+version: '3'
+services:
+  mongo:
+    image: 'mongo'
+  client:
+    build :
+      dockerfile : Dockerfile
+      context: ./client 
+    volumes:
+      - ./client/build:/usr/share/nginx/html
+    ports:
+      - '4000:4000' 
+  api:
+    build:
+      dockerfile : Dockerfile  
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - MONGO_HOST=mongo
+    depends_on:
+      - mongo      

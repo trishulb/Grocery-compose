@@ -1,0 +1,21 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker run -t trishulb/nClient npm build ./client
+  - docker run -t trishulb/nClient ./client
+
+script:
+  - docker run trishulb/nClient npm test -- --coverage
+
+after-build:
+  - docker build -t trishulb/nClient ./client
+  - docker build -t trishulb/nServer ./server
+
+# Log in into docker CLI
+  - echo "$DOCKER_PASSWORD"| docker login -u "$DOCKER_ID" --password-stdin
+  
+# take those imagases and push them to docker hub
+  - docker push trishulb/nClient
+  - docker push trishulb/nServer  
