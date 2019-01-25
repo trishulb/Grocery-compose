@@ -7,7 +7,7 @@ before_install:
   - cd ./client
   - npm install
   - npm run build
-  - docker build -t trishulb/nclient ./client
+  - docker build -t trishulb/nclient
 
 script:
   - docker run trishulb/nclient npm test -- --coverage
