@@ -7,18 +7,18 @@ before_install:
   - cd ./client
   - npm install
   - npm run build
-  - docker build -t trishulb/nClient ./client
+  - docker build -t trishulb/nclient ./client
 
 script:
-  - docker run trishulb/nClient npm test -- --coverage
+  - docker run trishulb/nclient npm test -- --coverage
 
 after-build:
-  - docker build -t trishulb/nClient ./client
-  - docker build -t trishulb/nServer ./server
+  - docker build -t trishulb/nclient ./client
+  - docker build -t trishulb/nserver ./server
 
 # Log in into docker CLI
   - echo "$DOCKER_PASSWORD"| docker login -u "$DOCKER_ID" --password-stdin
   
 # take those imagases and push them to docker hub
-  - docker push trishulb/nClient
-  - docker push trishulb/nServer  
+  - docker push trishulb/nclient
+  - docker push trishulb/nserver  
