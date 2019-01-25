@@ -1,10 +1,13 @@
 sudo: required
 services:
   - docker
+  - node
 
 before_install:
-  - docker run -t trishulb/nClient npm build ./client
-  - docker run -t trishulb/nClient ./client
+  - cd ./client
+  - npm install
+  - npm run build
+  - docker build -t trishulb/nClient ./client
 
 script:
   - docker run trishulb/nClient npm test -- --coverage
