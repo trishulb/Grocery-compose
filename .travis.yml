@@ -4,8 +4,8 @@ services:
 
 before_install: true
   
-script:
-  - docker build -t trishulb/nclient ./client
+script: true
+
 after-build:
   - docker build -t trishulb/nclient ./client
   - docker build -t trishulb/nserver ./server
