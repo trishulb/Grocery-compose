@@ -6,7 +6,7 @@ before_install: true
   
 script: true
 
-after-build:
+after_success:
   - docker build -t trishulb/nclient ./client
   - docker build -t trishulb/nserver ./server
 
