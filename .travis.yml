@@ -2,10 +2,10 @@ sudo: required
 services:
   - docker
 
-before_install:
-
+before_install: true
+  
 script:
-
+  - docker build -t trishulb/nclient ./client
 after-build:
   - docker build -t trishulb/nclient ./client
   - docker build -t trishulb/nserver ./server
